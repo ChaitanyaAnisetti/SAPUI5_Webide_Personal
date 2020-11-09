@@ -1,0 +1,103 @@
+{
+	"xsappname": "vehiclelocatorandtrade",
+	"tenant-mode": "dedicated",
+	"description": "Security profile of called application",
+	"scopes": [{
+		"name": "$XSAPPNAME.Manage_Vehicles",
+		"description": "Manage Vehicles"
+	}, {
+		"name": "$XSAPPNAME.View_Trade_Request",
+		"description": "View Trade Request"
+	}, {
+		"name": "$XSAPPNAME.View_DNC",
+		"description": "View DNC"
+	}, {
+		"name": "$XSAPPNAME.Manage_Trade_Request",
+		"description": "Manage Trade Request"
+	}, {
+		"name": "$XSAPPNAME.View_Vehicles",
+		"description": "View Vehicles"
+	}, {
+		"name": "$XSAPPNAME.Manage_DNC",
+		"description": "Manage DNC"
+	}],
+	"attributes": [{
+		"name": "DealerCode",
+		"description": "Dealer Code",
+		"valueType": "s"
+	}, {
+		"name": "Language",
+		"description": "Language",
+		"valueType": "s"
+	}, {
+		"name": "UserType",
+		"description": "UserType, identifies dealer or not",
+		"valueType": "s"
+	}, {
+		"name": "Zone",
+		"description": "restrict based on Zone",
+		"valueType": "s"
+ 
+		}, {
+				"name": "FirstName",
+				"description": "First Name From Token",
+				"valueType": "s"
+	 	
+			}, {
+				"name": "LastName",
+				"description": "Last Name From Token",
+				"valueType": "s"
+			}	
+ 
+	],
+
+	"role-templates": [{
+			"name": "VehicleTrade_Dealer_User",
+			"description": "Vehicle Trade Dealer User",
+			"scope-references": [
+		
+				"$XSAPPNAME.Manage_Trade_Request",
+				"$XSAPPNAME.Manage_DNC",
+				"$XSAPPNAME.View_Vehicles"
+			],
+			"attribute-references": [
+				"DealerCode",
+				"Language",
+				"UserType",
+				"FirstName",
+				"LastName"
+			]
+		}, {
+			"name": "Zone_User",
+			"description": "This is a Zone User",
+			"scope-references": [
+				"$XSAPPNAME.Manage_Vehicles",
+				"$XSAPPNAME.View_Trade_Request",
+				"$XSAPPNAME.View_DNC"
+			],
+			"attribute-references": [
+				"Zone",
+				"Language",
+				"UserType",
+				"FirstName",
+				"LastName"
+			]
+		}, {
+			"name": "TCI_user",
+			"description": "This is a TCI User",
+			"scope-references": [
+				"$XSAPPNAME.Manage_Vehicles",
+				"$XSAPPNAME.View_Trade_Request",
+				"$XSAPPNAME.View_DNC"
+			 
+			],
+			"attribute-references": [
+				"Language",
+				"UserType",
+				"FirstName",
+				"LastName"
+			]
+
+		}
+	]
+}

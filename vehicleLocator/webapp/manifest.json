@@ -1,0 +1,260 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "vehicleLocator",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"xsodata": {
+
+				"uri": "/xsodata/vehicleTrade_SRV.xsodata",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"ModelBlockS": {
+				"uri": "/node/Z_DEALER_TRADE_REQUEST_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"VehicleS": {
+				"uri": "/node/Z_VEHICLE_CATALOGUE_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"DealersS": {
+				"uri": "/node/API_BUSINESS_PARTNER",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "vehicleLocator.view.VehicleLocSearch",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "vehicleLocator.i18n.i18n"
+				}
+			},
+			"TradeRequestModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+				 
+					"json": true,
+					"useBatch": false
+				},
+				"dataSource": "xsodata",
+				"preload": false
+			},
+			"ModelBlock": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+				 
+					"json": true,
+					"useBatch": false
+				},
+				"dataSource": "ModelBlockS",
+				"preload": false
+			},
+			"Vehicles": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+				 
+					"json": true,
+					"useBatch": false
+				},
+				"dataSource": "VehicleS",
+				"preload": false
+			},
+			"Dealers": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+				 
+					"json": true,
+					"useBatch": false
+				},
+				"dataSource": "DealersS",
+				"preload": false
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "vehicleLocator.view",
+				"controlId": "idAppControl",
+				"controlAggregation": "pages"
+		
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "VehicleLocSearch",
+				"target": "VehicleLocSearch"
+			}, {
+				"pattern": "VehicleSearcResults/:LoginUser:",
+				"name": "VehicleSearcResults",
+				"target": "VehicleSearcResults"
+			}, {
+				"pattern": "VehicleTrade_CreateSingle/:SelectedTrade:",
+				"name": "VehicleTrade_CreateSingle",
+				"target": "VehicleTrade_CreateSingle"
+			}, {
+				"pattern": "VehicleTrade_VehicleSelection/:SelectedVehicleFrom:",
+				"name": "VehicleTrade_VehicleSelection",
+				"target": "VehicleTrade_VehicleSelection"
+			}, {
+				"pattern": "VehcTrad_Apprv_Rej_CounTrad/:selectedmyTr:",
+				"name": "VehcTrad_Apprv_Rej_CounTrad",
+				"target": "VehcTrad_Apprv_Rej_CounTrad"
+			}, {
+				"pattern": "VehicleTrade_UpdtTradReq/:SelectedTrade:",
+				"name": "VehicleTrade_UpdtTradReq",
+				"target": "VehicleTrade_UpdtTradReq"
+			}, {
+				"pattern": "VehicleTrade_History/:DataClicked:",
+				"name": "VehicleTrade_History",
+				"target": "VehicleTrade_History"
+			}, {
+				"pattern": "VehicleTrade_ModelBlock_Summary/:SelectedTrade:",
+				"name": "VehicleTrade_ModelBlock_Summary",
+				"target": "VehicleTrade_ModelBlock_Summary"
+			}, {
+				"pattern": "VehicleTrade_Summary/:DataClicked:",
+				"name": "VehicleTrade_Summary",
+				"target": "VehicleTrade_Summary"
+			}],
+			"targets": {
+				"VehicleLocSearch": {
+					"viewName": "VehicleLocSearch",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleSearcResults": {
+					"viewName": "VehicleSearcResults",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_CreateSingle": {
+					"viewName": "VehicleTrade_CreateSingle",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehcTrad_Apprv_Rej_CounTrad": {
+					"viewName": "VehcTrad_Apprv_Rej_CounTrad",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_UpdtTradReq": {
+					"viewName": "VehicleTrade_UpdtTradReq",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_History": {
+					"viewName": "VehicleTrade_History",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_ModelBlock_Summary": {
+					"viewName": "VehicleTrade_ModelBlock_Summary",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_Summary": {
+					"viewName": "VehicleTrade_Summary",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_VehicleSelection": {
+					"viewName": "VehicleTrade_VehicleSelection",
+					"async": true,
+					"clearControlAggregation": false
+				}
+			}
+		},
+	     "resources": {
+            "js": [{
+                "uri": "lib/moment-with-locales.js"
+            },
+            {
+                "uri": "lib/moment-timezone-with-data.js"
+            }
+            
+            ],
+             "css": [{
+                "uri": "css/style.css"
+            }]
+        }	
+
+	}
+}
